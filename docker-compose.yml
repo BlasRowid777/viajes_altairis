@@ -1,0 +1,23 @@
+
+version: '3.9'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: altairis
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend/Altairis.Api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend/altairis-front
+    ports:
+      - "3000:3000"
